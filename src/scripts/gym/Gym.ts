@@ -618,32 +618,31 @@ gymList['Eterna City'] = new Gym(
     BadgeCase.Badge.Coal,
     "I might've said it before, but you're really tough! Wasn't it hard for you to raise your Pokémon to be so good? I guess that's a measure of how much you love your Pokémon. In recognition of that, I proudly grant you this!"
 );
+gymList['Hearthome City'] = new Gym(
+    'Fantina',
+    'Veilstone City',
+    [
+        new GymPokemon('Duskull', 100000, 24),
+        new GymPokemon('Haunter', 100000, 24),
+        new GymPokemon('Mismagius', 100000, 36),
+    ],
+    BadgeCase.Badge.Relic,
+    500,
+    BadgeCase.Badge.Forest,
+    "...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Gym Badge."
+);
 gymList['Veilstone City'] = new Gym(
     'Maylene',
     'Veilstone City',
     [
-        new GymPokemon('Meditite', 50000, 28),
-        new GymPokemon('Machoke', 80000, 29),
-        new GymPokemon('Lucario', 80000, 32),
+        new GymPokemon('Meditite', 100000, 28),
+        new GymPokemon('Machoke', 100000, 29),
+        new GymPokemon('Lucario', 100000, 32),
     ],
-    BadgeCase.Badge.Forest,
-    500,
     BadgeCase.Badge.Cobble,
-    "...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Gym Badge."
-);
-gymList['Ecruteak City'] = new Gym(
-    'Morty',
-    'Ecruteak City',
-    [
-        new GymPokemon('Gastly', 37000, 21),
-        new GymPokemon('Haunter', 38000, 21),
-        new GymPokemon('Haunter', 40000, 23),
-        new GymPokemon('Gengar', 42000, 25),
-    ],
-    BadgeCase.Badge.Fog,
     500,
-    BadgeCase.Badge.Plain,
-    'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
+    BadgeCase.Badge.Relic,
+    "...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Gym Badge."
 );
 gymList['Cianwood City'] = new Gym(
     'Chuck',
