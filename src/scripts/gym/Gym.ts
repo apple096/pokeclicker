@@ -624,7 +624,7 @@ gymList['Hearthome City'] = new Gym(
     [
         new GymPokemon('Duskull', 100000, 24),
         new GymPokemon('Haunter', 100000, 24),
-        new GymPokemon('Mismagius', 100000, 36),
+        new GymPokemon('Mismagius', 100000, 26),
     ],
     BadgeCase.Badge.Relic,
     500,
