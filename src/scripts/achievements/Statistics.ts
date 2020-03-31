@@ -1,6 +1,8 @@
 ///<reference path="../oakItems/OakItems.ts"/>
 ///<reference path="../farming/BerryType.ts"/>
 ///<reference path="../pokemons/PokemonType.ts"/>
+///<reference path="../gym/GymLeaderName.ts"/>
+///<reference path="../dungeons/DungeonName.ts"/>
 class Statistics {
 
     public clicks: KnockoutObservable<number>;
@@ -24,8 +26,8 @@ class Statistics {
     public routeKills: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        'gymsDefeated': GameConstants.RegionGyms.flat().length,
-        'dungeonsCleared': GameConstants.RegionDungeons.flat().length,
+        'gymsDefeated': GameHelper.enumLength(GymLeaderName) - 1,
+        'dungeonsCleared': GameHelper.enumLength(DungeonName) - 1,
         'pokeballsUsed': GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
         'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
@@ -70,15 +72,4 @@ class Statistics {
             });
         }
     }
-
-    public static getGymIndex(gym: string) {
-        const gyms = GameConstants.RegionGyms.flat();
-        return gyms.indexOf(gym);
-    }
-
-    public static getDungeonIndex(dungeon: string) {
-        const dungeons = GameConstants.RegionDungeons.flat();
-        return dungeons.indexOf(dungeon);
-    }
-
 }

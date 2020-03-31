@@ -9,20 +9,26 @@ class PokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
+    public static generateWildPokemon(route: number, region: RegionName): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
+            console.error(`Invalid route ${route} in region ${RegionName[region]}`);
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-        let name: string;
 
+        let possiblePokemon: string[] = [];
         if (PokemonFactory.roamingEncounter(route)) {
-            const possible = GameConstants.RoamingPokemon[region];
-            name = possible[Math.floor(Math.random() * possible.length)];
-        } else {
-            const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * pokemonList.length);
-            name = pokemonList[rand];
+            possiblePokemon = GameConstants.RoamingPokemon[region];
         }
+        if (possiblePokemon.length === 0) {
+            possiblePokemon = App.game.world.getRegion(region).getRoute(route).getAvailablePokemon();
+        }
+
+        if (possiblePokemon.length === 0) {
+            console.error(`Could not find pokemon to spawn on route ${route} in region ${RegionName[region]}`);
+            return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
+        }
+
+        const name = GameConstants.randomElement(possiblePokemon);
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
 
@@ -40,28 +46,28 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny);
     }
 
-    public static routeLevel(route: number, region: GameConstants.Region): number {
+    public static routeLevel(route: number, region: RegionName): number {
         return route * 2;
     }
 
-    public static routeHealth(route: number, region: GameConstants.Region): number {
+    public static routeHealth(route: number, region: RegionName): number {
         switch (region) {
             // Hoenn starts at route 101 need to reduce the total hp of pokemon on those routes.
-            case GameConstants.Region.hoenn:
+            case RegionName.hoenn:
                 route -= 54;
                 break;
         }
         return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
     }
 
-    public static routeMoney(route: number, region: GameConstants.Region): number {
+    public static routeMoney(route: number, region: RegionName): number {
         const deviation = Math.floor(Math.random() * 51) - 25;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;
     }
 
-    public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
+    public static routeDungeonTokens(route: number, region: RegionName): number {
         const tokens = 6 * Math.pow(this.routeLevel(route,region) / 3, 1.05);
 
         return tokens;
@@ -95,9 +101,7 @@ class PokemonFactory {
      * @param index index of the pokémon that is being generated.
      * @returns {any}
      */
-    public static generateTrainerPokemon(gymName: string, index: number): BattlePokemon {
-        const gym = gymList[gymName];
-        const pokemon = gym.pokemons[index];
+    public static generateTrainerPokemon(pokemon: GymPokemon, index: number): BattlePokemon {
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp * 1.5;
@@ -139,7 +143,7 @@ class PokemonFactory {
     }
 
     private static roamingEncounter(route): boolean {
-        switch (player.region) {
+        switch (App.game.world.currentRegion) {
             case 0:
                 return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, 25, 1, route);
             case 1:

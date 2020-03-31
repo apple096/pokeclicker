@@ -1,19 +1,23 @@
-class Town {
+///<reference path="../shop/ShopName.ts"/>
+///<reference path="../worldmap/worldRequirements/RouteRequirement.ts"/>
+///<reference path="../worldmap/worldRequirements/DungeonRequirement.ts"/>
+class Town extends WorldLocation {
+    requirements: WorldRequirement[];
+
     private _name: KnockoutObservable<string>;
-    private _gym?: KnockoutObservable<Gym>;
-    private _shop?: KnockoutObservable<Shop>;
-    private _dungeon?: KnockoutObservable<Dungeon>;
-    private _reqRoutes: number[];
+    public gyms: GymLeaderName[];
+    public shops: ShopName[];
+    public dungeons: DungeonName[];
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
-    constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon, dungeonReq?: string) {
+    constructor(name: string, requirements: WorldRequirement[] = [], shops: ShopName[] = [], gyms: GymLeaderName[] = [], dungeons: DungeonName[] = []) {
+        super();
         this._name = ko.observable(name);
-        this._gym = ko.observable(gymList[name]);
-        this._reqRoutes = routes;
-        this._shop = ko.observable(shop);
-        this._dungeon = ko.observable(dungeon);
-        this.dungeonReq = dungeonReq;
+        this.gyms = gyms;
+        this.requirements = requirements;
+        this.shops = shops;
+        this.dungeons = dungeons;
         this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1;
     }
 
@@ -21,178 +25,104 @@ class Town {
         return this._name;
     }
 
-    get reqRoutes(): number[] {
-        return this._reqRoutes;
-    }
-
-    get gym(): KnockoutObservable<Gym> {
-        return this._gym;
-    }
-
-    get shop(): KnockoutObservable<Shop> {
-        return this._shop;
-    }
-
-    get dungeon(): KnockoutObservable<Dungeon> {
-        return this._dungeon;
-    }
-
-    public hasRouteReq() {
-        for (const i of this.reqRoutes) {
-            if (player.statistics.routeKills[i]() < GameConstants.ROUTE_KILLS_NEEDED) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public hasDungeonReq() {
-        if (this.dungeonReq != undefined) {
-            return 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeonReq)]();
-        } else {
-            return true;
-        }
-    }
-
+    //TODO refactor to WorldLocation
     public isUnlocked() {
-        return this.hasRouteReq() && this.hasDungeonReq();
-    }
-}
-
-class DungeonTown extends Town {
-    public badgeReq: BadgeCase.Badge;
-
-    constructor(name: string, routes: number[], badge?: BadgeCase.Badge) {
-        super(name, routes, null, dungeonList[name]);
-        this.badgeReq = badge;
-    }
-
-    public isUnlocked() {
-        return (this.hasRouteReq() && App.game.badgeCase.hasBadge(this.badgeReq));
+        return !this.requirements.filter(req => !req.isCompleted()).length;
     }
 
 }
 
-const TownList: { [name: string]: Town | PokemonLeague } = {};
+class DungeonEntrance extends Town {
+    // TODO fix later
+    constructor(name: DungeonName, requirements: WorldRequirement[]) {
+        super(DungeonName[name], requirements, [], [], [name]);
+    }
+}
+
+const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
-const PewterCityShop = new Shop(['Pokeball', 'Token_collector', 'xExp','Dungeon_ticket']);
-TownList['Pewter City'] = new Town('Pewter City', [2], PewterCityShop);
-
-const CeruleanCityShop = new Shop(['Water_stone', 'xAttack', 'Water_egg']);
-TownList['Cerulean City'] = new Town('Cerulean City', [4], CeruleanCityShop, dungeonList['Cerulean Cave']);
-
-const VermillionCityShop = new Shop(['Thunder_stone', 'xExp', 'Electric_egg']);
-TownList['Vermillion City'] = new Town('Vermillion City', [6], VermillionCityShop);
-
-const CeladonCityShop = new Shop(['Eevee', 'Porygon', 'Jynx', 'Mr. Mime', 'Lickitung']);
-TownList['Celadon City'] = new Town('Celadon City', [8], CeladonCityShop);
-
-const SaffronCityShop = new Shop(['Moon_stone', 'xClick', 'Leaf_stone', 'Fighting_egg']);
-TownList['Saffron City'] = new Town('Saffron City', [5], SaffronCityShop);
-
-const FuchsiaCityShop = new Shop(['Ultraball', 'Trade_stone', 'xExp', 'Dragon_egg']);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [18], FuchsiaCityShop);
-
-const CinnabarIslandShop = new Shop(['Fire_stone', 'Fire_egg', 'SmallRestore', 'Explorer_kit']);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], CinnabarIslandShop, dungeonList['Pokemon Mansion']);
-
-const ViridianCityShop = new Shop(['xAttack', 'xClick', 'Mystery_egg']);
-TownList['Viridian City'] = new Town('Viridian City', [1], ViridianCityShop);
-
-TownList['Pallet Town'] = new Town('Pallet Town', []);
-
-const LavenderTownShop = new Shop(['Greatball', 'Item_magnet', 'Lucky_incense', 'Grass_egg']);
-TownList['Lavender Town'] = new Town('Lavender Town', [10], LavenderTownShop, dungeonList['Pokemon Tower']);
+TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.Pewter_City], [GymLeaderName.Brock]);
+TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.Cerulean_City], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
+TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.Vermillion_City], [GymLeaderName['Lt._Surge']]);
+TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.Celadon_City], [GymLeaderName.Erika]);
+TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.Saffron_City], [GymLeaderName.Sabrina]);
+TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.Fuchsia_City], [GymLeaderName.Koga]);
+TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.Cinnabar_Island], [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
+TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.Viridian_City], [GymLeaderName.Giovanni]);
+TownList['Pallet_Town'] = new Town('Pallet_Town');
+TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.Lavender_Town], [], [DungeonName.Pokemon_Tower]);
+TownList['Indigo_Plateau_Kanto'] = new Town('Indigo_Plateau_Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
 
 //Kanto Dungeons
-TownList['Viridian Forest'] = new DungeonTown('Viridian Forest', [1]);
-TownList['Digletts Cave'] = new DungeonTown('Digletts Cave', [1], BadgeCase.Badge.Boulder);
-TownList['Mt. Moon'] = new DungeonTown('Mt. Moon', [3], BadgeCase.Badge.Boulder);
-TownList['Rock Tunnel'] = new DungeonTown('Rock Tunnel', [9], BadgeCase.Badge.Cascade);
-TownList['Power Plant'] = new DungeonTown('Power Plant', [9], BadgeCase.Badge.Cascade);
-TownList['Pokemon Tower'] = new DungeonTown('Pokemon Tower', [10], BadgeCase.Badge.Cascade);
-TownList['Seafoam Islands'] = new DungeonTown('Seafoam Islands', [19], BadgeCase.Badge.Soul);
-TownList['Victory Road'] = new DungeonTown('Victory Road', [22], BadgeCase.Badge.Earth);
-TownList['Cerulean Cave'] = new DungeonTown('Cerulean Cave', [4], BadgeCase.Badge.Elite_KantoChampion);
-TownList['Pokemon Mansion'] = new DungeonTown('Pokemon Mansion', [20], BadgeCase.Badge.Soul);
+TownList['Viridian_Forest'] = new DungeonEntrance(DungeonName.Viridian_Forest, [new RouteRequirement(1)]);
+TownList['Digletts_Cave'] = new DungeonEntrance(DungeonName.Digletts_Cave, [new RouteRequirement(2), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Mt._Moon'] = new DungeonEntrance(DungeonName['Mt._Moon'], [new RouteRequirement(3), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Rock_Tunnel'] = new DungeonEntrance(DungeonName.Rock_Tunnel, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Power_Plant'] = new DungeonEntrance(DungeonName.Power_Plant, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Pokemon_Tower'] = new DungeonEntrance(DungeonName.Pokemon_Tower, [new RouteRequirement(10), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Seafoam_Islands'] = new DungeonEntrance(DungeonName.Seafoam_Islands, [new RouteRequirement(19), new BadgeRequirement(BadgeCase.Badge.Soul)]);
+TownList['Victory_Road'] = new DungeonEntrance(DungeonName.Victory_Road, [new RouteRequirement(22), new BadgeRequirement(BadgeCase.Badge.Earth)]);
+TownList['Cerulean_Cave'] = new DungeonEntrance(DungeonName.Cerulean_Cave, [new RouteRequirement(4), new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)]);
+TownList['Pokemon_Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [new RouteRequirement(20), new BadgeRequirement(BadgeCase.Badge.Soul)]);
 
 //Johto Towns
-const NewBarkTownShop = new Shop(['Pokeball']);
-TownList['New Bark Town'] = new Town('New Bark Town', [], NewBarkTownShop);
-
-const CherrygroveCityShop = new Shop(['Greatball']);
-TownList['Cherrygrove City'] = new Town('Cherrygrove City', [29], CherrygroveCityShop);
-
-const VioletCityShop = new Shop(['MediumRestore', 'Togepi']);
-TownList['Violet City'] = new Town('Violet City', [31], VioletCityShop, dungeonList['Sprout Tower']);
-
-const AzaleaTownShop = new Shop(['Kings_rock']);
-TownList['Azalea Town'] = new Town('Azalea Town', [33], AzaleaTownShop, dungeonList['Slowpoke Well']);
-
-const GoldenrodCityShop = new Shop(['Sun_stone', 'Upgrade']);
-TownList['Goldenrod City'] = new Town('Goldenrod City', [34], GoldenrodCityShop);
-
-TownList['Ecruteak City'] = new Town('Ecruteak City', [37]);
-
-const OlivineCityShop = new Shop(['Metal_coat']);
-TownList['Olivine City'] = new Town('Olivine City', [39], OlivineCityShop);
-
-const CianwoodCityShop = new Shop(['Ultraball', 'Time_stone']);
-TownList['Cianwood City'] = new Town('Cianwood City', [41], CianwoodCityShop);
-
-TownList['Mahogany Town'] = new Town('Mahogany Town', [42], null, null, 'Mt Mortar');
-
-const BlackthornCityShop = new Shop(['LargeRestore', 'Dragon_scale']);
-TownList['Blackthorn City'] = new Town('Blackthorn City', [44], BlackthornCityShop, null, 'Ice Path');
+TownList['New_Bark_Town'] = new Town('New_Bark_Town', [], [ShopName.New_Bark_Town]);
+TownList['Cherrygrove_City'] = new Town('Cherrygrove_City', [new RouteRequirement(29)], [ShopName.Cherrygrove_City]);
+TownList['Violet_City'] = new Town('Violet_City', [new RouteRequirement(31)], [ShopName.Violet_City], [], [DungeonName.Sprout_Tower]);
+TownList['Azalea_Town'] = new Town('Azalea_Town', [new RouteRequirement(33)], [ShopName.Azalea_Town], [], [DungeonName.Slowpoke_Well]);
+TownList['Goldenrod_City'] = new Town('Goldenrod_City', [new RouteRequirement(34)], [ShopName.Goldenrod_City]);
+TownList['Ecruteak_City'] = new Town('Ecruteak_City', [new RouteRequirement(37)]);
+TownList['Olivine_City'] = new Town('Olivine_City', [new RouteRequirement(39)], [ShopName.Olivine_City]);
+TownList['Cianwood_City'] = new Town('Cianwood_City', [new RouteRequirement(41)], [ShopName.Cianwood_City]);
+TownList['Mahogany_Town'] = new Town('Mahogany_Town', [new RouteRequirement(42), new DungeonRequirement(DungeonName.Mt_Mortar)]);
+TownList['Blackthorn_City'] = new Town('Blackthorn_City', [new RouteRequirement(44), new DungeonRequirement(DungeonName.Ice_Path)], [ShopName.Blackthorn_City]);
 
 //Johto Dungeons
-TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
-TownList['Ruins of Alph'] = new DungeonTown('Ruins of Alph', [32]);
-TownList['Union Cave'] = new DungeonTown('Union Cave', [32]);
-TownList['Slowpoke Well'] = new DungeonTown('Slowpoke Well', [33]);
-TownList['Ilex Forest'] = new DungeonTown('Ilex Forest', [33]);
-TownList['Burned Tower'] = new DungeonTown('Burned Tower', [37]);
-TownList['Tin Tower'] = new DungeonTown('Tin Tower', [37]);
-TownList['Whirl Islands'] = new DungeonTown('Whirl Islands', [41]);
-TownList['Mt Mortar'] = new DungeonTown('Mt Mortar', [42]);
-TownList['Ice Path'] = new DungeonTown('Ice Path', [44]);
-TownList['Dark Cave'] = new DungeonTown('Dark Cave', [45]);
-TownList['Mt Silver'] = new DungeonTown('Mt Silver', [28], BadgeCase.Badge.Elite_Karen);
+TownList['Sprout_Tower'] = new DungeonEntrance(DungeonName.Sprout_Tower, [new RouteRequirement(31)]);
+TownList['Ruins_of_Alph'] = new DungeonEntrance(DungeonName.Ruins_of_Alph, [new RouteRequirement(32)]);
+TownList['Union_Cave'] = new DungeonEntrance(DungeonName.Union_Cave, [new RouteRequirement(32)]);
+TownList['Slowpoke_Well'] = new DungeonEntrance(DungeonName.Slowpoke_Well, [new RouteRequirement(33)]);
+TownList['Ilex_Forest'] = new DungeonEntrance(DungeonName.Ilex_Forest, [new RouteRequirement(33)]);
+TownList['Burned_Tower'] = new DungeonEntrance(DungeonName.Burned_Tower, [new RouteRequirement(37)]);
+TownList['Tin_Tower'] = new DungeonEntrance(DungeonName.Tin_Tower, [new RouteRequirement(37)]);
+TownList['Whirl_Islands'] = new DungeonEntrance(DungeonName.Whirl_Islands, [new RouteRequirement(41)]);
+TownList['Mt_Mortar'] = new DungeonEntrance(DungeonName.Mt_Mortar, [new RouteRequirement(42)]);
+TownList['Ice_Path'] = new DungeonEntrance(DungeonName.Ice_Path, [new RouteRequirement(44)]);
+TownList['Dark_Cave'] = new DungeonEntrance(DungeonName.Dark_Cave, [new RouteRequirement(45)]);
+TownList['Mt_Silver'] = new DungeonEntrance(DungeonName.Mt_Silver, [new RouteRequirement(28), new BadgeRequirement(BadgeCase.Badge.Elite_Karen)]);
 
 //Hoenn Towns
-TownList['Littleroot Town'] = new Town('Littleroot Town', []);
-TownList['Oldale Town'] = new Town('Oldale Town', [101]);
-TownList['Petalburg City'] = new Town('Petalburg City', [102]);
-TownList['Rustboro City'] = new Town('Rustboro City', [104], null, null, 'Petalburg Woods');
-TownList['Dewford Town'] = new Town('Dewford Town', [116], null, null, 'Rusturf Tunnel');
-TownList['Slateport City'] = new Town('Slateport City', [], null, null, 'Granite Cave');
-TownList['Mauville City'] = new Town('Mauville City', [110]);
-TownList['Verdanturf Town'] = new Town('Verdanturf Town', [117]);
-TownList['Lavaridge Town'] = new Town('Lavaridge Town', [115], null, null, 'Mt. Chimney');
-TownList['Fallarbor Town'] = new Town('Fallarbor Town', [113]);
-TownList['Fortree City'] = new Town('Fortree City', [119]);
-TownList['Lilycove City'] = new Town('LilyCove City', [121], null, null, 'Mt. Pyre');
-TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
-TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
-TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
-TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
-TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [131]);
+// TownList['Littleroot Town'] = new Town('Littleroot Town', []);
+// TownList['Oldale Town'] = new Town('Oldale Town', [101]);
+// TownList['Petalburg City'] = new Town('Petalburg City', [102]);
+// TownList['Rustboro City'] = new Town('Rustboro City', [104], null, null, 'Petalburg Woods');
+// TownList['Dewford Town'] = new Town('Dewford Town', [116], null, null, 'Rusturf Tunnel');
+// TownList['Slateport City'] = new Town('Slateport City', [], null, null, 'Granite Cave');
+// TownList['Mauville City'] = new Town('Mauville City', [110]);
+// TownList['Verdanturf Town'] = new Town('Verdanturf Town', [117]);
+// TownList['Lavaridge Town'] = new Town('Lavaridge Town', [115], null, null, 'Mt. Chimney');
+// TownList['Fallarbor Town'] = new Town('Fallarbor Town', [113]);
+// TownList['Fortree City'] = new Town('Fortree City', [119]);
+// TownList['Lilycove City'] = new Town('LilyCove City', [121], null, null, 'Mt. Pyre');
+// TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
+// TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
+// TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
+// TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
+// TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [131]);
 
 //Hoenn Dungeons
-TownList['Petalburg Woods'] = new DungeonTown('Petalburg Woods', [104]);
-TownList['Rusturf Tunnel'] = new DungeonTown('Rusturf Tunnel', [116], BadgeCase.Badge.Stone);
-TownList['Granite Cave'] = new DungeonTown('Granite Cave', [116], BadgeCase.Badge.Knuckle);
-TownList['Fiery Path'] = new DungeonTown('Fiery Path', [111], BadgeCase.Badge.Dynamo);
-TownList['Meteor Falls'] = new DungeonTown('Meteor Falls', [114]);
-TownList['Mt. Chimney'] = new DungeonTown('Mt. Chimney', [115]);
-TownList['Jagged Pass'] = new DungeonTown('Jagged Pass', [115]);
-TownList['New Mauville'] = new DungeonTown('New Mauville', [112], BadgeCase.Badge.Heat);
-TownList['Sea Mauville'] = new DungeonTown('Sea Mauville', [108]);
-TownList['Mt. Pyre'] = new DungeonTown('Mt. Pyre', [122]);
-TownList['Shoal Cave'] = new DungeonTown('Shoal Cave', [125]);
-TownList['Cave of Origin'] = new DungeonTown('Cave of Origin', [126]);
-TownList['Seafloor Cavern'] = new DungeonTown('Seafloor Cavern', [127]);
-TownList['Sky Pillar'] = new DungeonTown('Sky Pillar', [131]);
-TownList['Victory Road Hoenn'] = new DungeonTown('Victory Road Hoenn', [128], BadgeCase.Badge.Rain);
+// TownList['Petalburg Woods'] = new DungeonEntrance(DungeonName.Petalburg Woods, [new RouteRequirement(104)]);
+// TownList['Rusturf Tunnel'] = new DungeonEntrance(DungeonName.Rusturf Tunnel, [new RouteRequirement(116), new BadgeRequirement(BadgeCase.Badge.Stone)]);
+// TownList['Granite Cave'] = new DungeonEntrance(DungeonName.Granite Cave, [new RouteRequirement(116), new BadgeRequirement(BadgeCase.Badge.Knuckle)]);
+// TownList['Fiery Path'] = new DungeonEntrance(DungeonName.Fiery Path, [new RouteRequirement(111), new BadgeRequirement(BadgeCase.Badge.Dynamo)]);
+// TownList['Meteor Falls'] = new DungeonEntrance(DungeonName.Meteor Falls, [new RouteRequirement(114)]);
+// TownList['Mt. Chimney'] = new DungeonEntrance(DungeonName.Mt. Chimney, [new RouteRequirement(115)]);
+// TownList['Jagged Pass'] = new DungeonEntrance(DungeonName.Jagged Pass, [new RouteRequirement(115)]);
+// TownList['New Mauville'] = new DungeonEntrance(DungeonName.New Mauville, [new RouteRequirement(112), new BadgeRequirement(BadgeCase.Badge.Heat)]);
+// TownList['Mt. Pyre'] = new DungeonEntrance(DungeonName.Mt. Pyre, [new RouteRequirement(122)]);
+// TownList['Shoal Cave'] = new DungeonEntrance(DungeonName.Shoal Cave, [new RouteRequirement(125)]);
+// TownList['Cave of Origin'] = new DungeonEntrance(DungeonName.Cave of Origin, [new RouteRequirement(126)]);
+// TownList['Seafloor Cavern'] = new DungeonEntrance(DungeonName.Seafloor Cavern, [new RouteRequirement(127)]);
+// TownList['Sky Pillar'] = new DungeonEntrance(DungeonName.Sky Pillar, [new RouteRequirement(131)]);
+// TownList['Victory Road Hoenn'] = new DungeonEntrance(DungeonName.Victory Road Hoenn, [new RouteRequirement(128), new BadgeRequirement(BadgeCase.Badge.Rain)]);

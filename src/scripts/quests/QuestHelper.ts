@@ -54,13 +54,13 @@ class QuestHelper {
                 return new CatchShiniesQuest(1);
             case 'DefeatGym':
                 region = SeededRand.intBetween(0, player.highestRegion());
-                const gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
+                const leaderName = SeededRand.fromArray(App.game.world.getCurrentRegion().gyms).leaderName;
                 amount = SeededRand.intBetween(5, 20);
-                return new DefeatGymQuest(gymTown, amount);
+                return new DefeatGymQuest(leaderName, amount);
             case 'DefeatDungeon':
                 // Allow upto highest region
                 region = SeededRand.intBetween(0, player.highestRegion());
-                const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
+                const dungeon = SeededRand.fromArray(App.game.world.getCurrentRegion().dungeons).name;
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
             case 'UsePokeball':
@@ -204,7 +204,7 @@ class QuestHelper {
         }, this);
     }
 
-    public static highestOneShotRoute(region: GameConstants.Region): number {
+    public static highestOneShotRoute(region: RegionName): number {
         const [first, last] = GameConstants.RegionRoute[region];
         const attack = Math.max(1, App.game.party.calculatePokemonAttack());
 

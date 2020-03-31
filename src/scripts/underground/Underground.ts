@@ -186,7 +186,7 @@ class Underground {
     }
 
     private static canAccess() {
-        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+        return App.game.world.accessToRoute(11, RegionName.kanto) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
@@ -238,13 +238,6 @@ $(document).ready(function () {
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     });
 
-    $('#mineModal').on('hidden.bs.modal', function () {
-        if (player.route() == 11) {
-            App.game.gameState = GameConstants.GameState.fighting;
-        } else {
-            MapHelper.moveToRoute(11, GameConstants.Region.kanto);
-        }
-    });
 });
 
 namespace Underground {

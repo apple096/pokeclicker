@@ -15,12 +15,13 @@ class App {
                 new Pokeballs(),
                 new Wallet(),
                 new KeyItems(),
-                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
+                new BadgeCase(BadgeCase.Badge.Elite_HoennChampion),
                 new OakItems([20, 50, 100]),
                 new Party(),
                 new Shards(),
                 new Farming(),
                 new LogBook(),
+                new World([RegionFactory.createKanto(), RegionFactory.createJohto(), RegionFactory.createHoenn()]),
                 new RedeemableCodes()
             );
 

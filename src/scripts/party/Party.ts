@@ -59,7 +59,6 @@ class Party implements Feature {
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
         this._caughtPokemon.push(pokemon);
-
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -90,7 +89,7 @@ class Party implements Feature {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
-            if (player.region !== GameHelper.getRegion(pokemon.id)) {
+            if (App.game.world.currentRegion !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2;
             }
@@ -123,6 +122,12 @@ class Party implements Feature {
                 return this.caughtPokemon[i];
             }
         }
+    }
+
+    alreadyCaughtList(possiblePokemon: string[], includeShiny: boolean) {
+        return possiblePokemon.every(pokemon => {
+            return this.alreadyCaughtPokemonByName(pokemon, includeShiny);
+        });
     }
 
     alreadyCaughtPokemonByName(name: string, shiny = false) {

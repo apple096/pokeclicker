@@ -26,7 +26,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(routeTwo);
 
         //Defeat Pewter Gym
-        const pewter = new DefeatGymQuest(GameConstants.KantoGyms[0], 1);
+        const pewter = new DefeatGymQuest(GymLeaderName.Brock, 1);
         pewter.pointsReward = 40;
         pewter.description = 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.';
         this.tutorial.addQuest(pewter);
@@ -47,7 +47,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(buyDungeonTicket);
 
         //Cleat Mt Moon dungeon
-        const clearMtMoon = new DefeatDungeonQuest(GameConstants.KantoDungeons[2], 1);
+        const clearMtMoon = new DefeatDungeonQuest(DungeonName['Mt._Moon'], 1);
         clearMtMoon.pointsReward = 10;
         clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokemon, then clear the Mt. Moon dungeon.';
         this.tutorial.addQuest(clearMtMoon);

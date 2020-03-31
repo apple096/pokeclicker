@@ -56,9 +56,9 @@ class Battle {
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         this.gainShardsAfterBattle();
 
-        GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
+        GameHelper.incrementObservable(player.statistics.routeKills[App.game.world.currentRoute]);
 
-        App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
+        App.game.breeding.progressEggs(Math.floor(Math.sqrt(App.game.world.currentRoute) * 100) / 100);
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
@@ -93,11 +93,11 @@ class Battle {
      */
     public static generateNewEnemy() {
         Battle.counter = 0;
-        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
+        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(App.game.world.currentRoute, App.game.world.currentRegion));
         if (Battle.enemyPokemon().shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${App.game.world.currentRoute}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
-            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${App.game.world.currentRoute}.`);
         }
     }
 
@@ -133,13 +133,13 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(player.route(), player.region));
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(App.game.world.currentRoute, player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
 
     static gainItem() {
-        const p = player.route() / 1600 + 0.009375;
+        const p = App.game.world.currentRoute / 1600 + 0.009375;
 
         if (Math.random() < p) {
             App.game.farming.gainRandomBerry();

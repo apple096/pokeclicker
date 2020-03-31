@@ -8,11 +8,7 @@ class Player {
 
     public achievementsCompleted: { [name: string]: boolean };
 
-    private _route: KnockoutObservable<number>;
-
     private _defeatedAmount: Array<KnockoutObservable<number>>;
-
-    private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -21,22 +17,6 @@ class Player {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
-        this._region = ko.observable(savedPlayer._region);
-        if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
-            this._route = ko.observable(savedPlayer._route);
-        } else {
-            switch (savedPlayer._region) {
-                case 0:
-                    this._route = ko.observable(1);
-                    break;
-                case 1:
-                    this._route = ko.observable(29);
-                    break;
-                default:
-                    this._route = ko.observable(1);
-                    this._region = ko.observable(GameConstants.Region.kanto);
-            }
-        }
 
         this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
@@ -44,7 +24,7 @@ class Player {
         this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
-        this._town = ko.observable(TownList['Pallet Town']);
+        this._town = ko.observable(TownList['Pallet_Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
@@ -133,7 +113,7 @@ class Player {
     public tutorialState: any;
     public tutorialComplete: KnockoutObservable<boolean>;
 
-    private highestRegion: KnockoutObservable<GameConstants.Region>;
+    private highestRegion: KnockoutObservable<RegionName>;
 
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;
@@ -165,22 +145,6 @@ class Player {
 
     get itemMultipliers(): { [p: string]: number } {
         return this._itemMultipliers;
-    }
-
-    get route(): KnockoutObservable<number> {
-        return this._route;
-    }
-
-    set route(value: KnockoutObservable<number>) {
-        this._route = value;
-    }
-
-    get region(): GameConstants.Region {
-        return this._region();
-    }
-
-    set region(value: GameConstants.Region) {
-        this._region(value);
     }
 
     get town(): KnockoutObservable<Town> {
@@ -281,10 +245,8 @@ class Player {
 
     public toJSON() {
         const keep = [
-            '_route',
             '_defeatedAmount',
             '_caughtAmount',
-            '_region',
             '_starter',
             '_itemList',
             '_itemMultipliers',
@@ -299,7 +261,6 @@ class Player {
             '_lastSeen',
             'currentQuests',
             '_shinyCatches',
-            'gymDefeats',
             'statistics',
             'achievementsCompleted',
             'effectList',

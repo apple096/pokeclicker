@@ -14,8 +14,12 @@ class DungeonRunner {
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static dungeonFinished: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static initializeDungeon(dungeon) {
-        if (!dungeon.isUnlocked()) {
+    public static initializeDungeon(name: DungeonName) {
+        const dungeon = App.game.world.getDungeon(name);
+        if (dungeon === undefined) {
+            return;
+        }
+        if (!dungeon.canAccess()) {
             return false;
         }
         DungeonRunner.dungeon = dungeon;
@@ -24,7 +28,7 @@ class DungeonRunner {
             Notifier.notify("You don't have enough dungeon tokens", GameConstants.NotificationOption.danger);
             return false;
         }
-        App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        App.game.wallet.loseAmount(DungeonRunner.dungeon.entryCost);
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
@@ -92,7 +96,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            MapHelper.moveToTown(DungeonName[DungeonRunner.dungeon.name]);
             Notifier.notify('You could not complete the dungeon in time', GameConstants.NotificationOption.danger);
         }
     }
@@ -100,8 +104,8 @@ class DungeonRunner {
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
-            GameHelper.incrementObservable(player.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            GameHelper.incrementObservable(player.statistics.dungeonsCleared[DungeonRunner.dungeon.name]);
+            MapHelper.moveToTown(DungeonName[DungeonRunner.dungeon.name]);
             // TODO award loot with a special screen
             Notifier.notify('You have successfully completed the dungeon', GameConstants.NotificationOption.success);
         }
@@ -113,10 +117,10 @@ class DungeonRunner {
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         const possiblePokemon: string[] = dungeon.allPokemonNames;
-        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+        return App.game.party.alreadyCaughtList(possiblePokemon, includeShiny);
     }
 
     public static hasEnoughTokens() {
-        return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        return App.game.wallet.hasAmount(DungeonRunner.dungeon.entryCost);
     }
 }

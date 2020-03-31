@@ -3,35 +3,42 @@ class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(new Gym(GymLeaderName.None, [], BadgeCase.Badge.None, 0, [], ''));
     public static started: boolean;
 
-    public static startGym(gym: Gym) {
+    public static startGym(name: GymLeaderName) {
+        if (name === GymLeaderName.None) {
+            console.error(`Cannot start gym ${name}`);
+        }
+
+        const gym = App.game.world.getGym(name);
+
         this.started = false;
         this.gymObservable(gym);
-        if (Gym.isUnlocked(gym)) {
-            if (gym instanceof Champion) {
-                gym.setPokemon(player.starter);
-            }
-            App.game.gameState = GameConstants.GameState.idle;
-            GymRunner.timeLeft(GameConstants.GYM_TIME);
-            GymRunner.timeLeftPercentage(100);
-
-            GymBattle.gym = gym;
-            GymBattle.totalPokemons(gym.pokemons.length);
-            GymBattle.index(0);
-            GymBattle.generateNewEnemy();
-            App.game.gameState = GameConstants.GameState.gym;
-            this.resetGif();
-
-            setTimeout(function () {
-                this.started = true;
-                this.hideGif();
-            }.bind(this), GameConstants.GYM_COUNTDOWN);
-
-        } else {
-            Notifier.notify(`${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, GameConstants.NotificationOption.danger);
+        if (!gym.canAccess()) {
+            Notifier.notify(`${GymLeaderName[gym.leaderName]} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, GameConstants.NotificationOption.danger);
+            return;
         }
+        if (gym instanceof Champion) {
+            gym.setPokemon(player.starter);
+        }
+        App.game.gameState = GameConstants.GameState.idle;
+        GymRunner.timeLeft(GameConstants.GYM_TIME);
+        GymRunner.timeLeftPercentage(100);
+
+        GymBattle.gym = gym;
+        GymBattle.totalPokemons(gym.pokemons.length);
+        GymBattle.index(0);
+        GymBattle.generateNewEnemy();
+        App.game.gameState = GameConstants.GameState.gym;
+        this.resetGif();
+
+        setTimeout(function () {
+            this.started = true;
+            this.hideGif();
+        }.bind(this), GameConstants.GYM_COUNTDOWN);
+
+
     }
 
     private static hideGif() {
@@ -60,12 +67,12 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify(`It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`, GameConstants.NotificationOption.danger);
+        Notifier.notify(`It appears you are not strong enough to defeat ${GymLeaderName[GymBattle.gym.leaderName]}`, GameConstants.NotificationOption.danger);
         App.game.gameState = GameConstants.GameState.town;
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify(`Congratulations, you defeated ${GymBattle.gym.leaderName}!`, GameConstants.NotificationOption.success);
+        Notifier.notify(`Congratulations, you defeated ${GymLeaderName[GymBattle.gym.leaderName]}!`, GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
@@ -73,8 +80,7 @@ class GymRunner {
 
             $('#receiveBadgeModal').modal('show');
         }
-        GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
-        player.town(TownList[gym.town]);
+        GameHelper.incrementObservable(player.statistics.gymsDefeated[gym.leaderName]);
         App.game.gameState = GameConstants.GameState.town;
     }
 

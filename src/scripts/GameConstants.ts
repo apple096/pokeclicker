@@ -20,7 +20,7 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
-    export const MAX_AVAILABLE_REGION = 1;
+    export const MAX_AVAILABLE_REGION = 2;
 
     export const TotalPokemonsPerRegion = [
         151, // 151
@@ -40,6 +40,7 @@ namespace GameConstants {
     export const RoamingPokemon = {
         0: ['Mew'],
         1: ['Raikou', 'Entei', 'Suicune'],
+        2: ['Latios', 'Latias', 'Regice', 'Regirock', 'Registeel', 'Jirachi', 'Deoxys'],
     };
 
     // Shinies
@@ -228,17 +229,6 @@ namespace GameConstants {
         return `${hours}:${minutes}:${seconds}`;
     }
 
-    export enum Region {
-        kanto = 0,
-        johto = 1,
-        hoenn = 2,
-        sinnoh = 3,
-        unova = 4,
-        kalos = 5,
-        alola = 6,
-        galar = 7,
-    }
-
     export class Option {
         text: string;
         value: any;
@@ -300,46 +290,6 @@ namespace GameConstants {
      * Access with routeRequirements.region.routeNumber
      */
     export const routeRequirements = {
-        0: {
-            1: [],
-            2: [1],
-            3: [2],
-            4: [3],
-            5: [4],
-            6: [5],
-            7: [5, 10],
-            8: [5, 6, 7],
-            9: [4],
-            10: [9],
-            11: [6],
-            12: [7, 10, 11],
-            13: [11, 12],
-            14: [13],
-            15: [14],
-            16: [8],
-            17: [16],
-            18: [17],
-            19: [15, 18],
-            20: [19],
-            21: [20],
-            22: [1],
-            23: [22],
-            24: [4],
-            25: [24],
-        },
-        1: {
-            30: [29],
-            31: [30],
-            33: [32],
-            36: [35],
-            37: [36],
-            39: [38],
-            40: [39],
-            41: [40],
-            46: [45],
-            26: [46],
-            27: [26],
-        },
         2: {
             102: [101],
             103: [101],
@@ -378,32 +328,6 @@ namespace GameConstants {
     };
 
     export const routeBadgeRequirements = {
-        0: {
-            3: BadgeCase.Badge.Boulder,
-            5: BadgeCase.Badge.Cascade,
-            7: BadgeCase.Badge.Thunder,
-            8: BadgeCase.Badge.Thunder,
-            9: BadgeCase.Badge.Cascade,
-            11: BadgeCase.Badge.Thunder,
-            12: BadgeCase.Badge.Marsh,
-            13: BadgeCase.Badge.Marsh,
-            16: BadgeCase.Badge.Marsh,
-            19: BadgeCase.Badge.Soul,
-            21: BadgeCase.Badge.Volcano,
-            22: BadgeCase.Badge.Earth,
-            24: BadgeCase.Badge.Cascade,
-        },
-        1: {
-            28: BadgeCase.Badge.Elite_JohtoChampion,
-            32: BadgeCase.Badge.Zephyr,
-            34: BadgeCase.Badge.Hive,
-            35: BadgeCase.Badge.Plain,
-            38: BadgeCase.Badge.Fog,
-            42: BadgeCase.Badge.Mineral,
-            43: BadgeCase.Badge.Glacier,
-            44: BadgeCase.Badge.Glacier,
-            45: BadgeCase.Badge.Rising,
-        },
         2: {
             116: BadgeCase.Badge.Stone,
             117: BadgeCase.Badge.Knuckle,
@@ -418,20 +342,10 @@ namespace GameConstants {
     };
 
     export const WaterRoutes = {
-        0: new Set([19,20,21]),
-        1: new Set([40,41]),
         2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134]),
     };
 
     export const routeDungeonRequirements = {
-        0: {
-            4: 'Mt. Moon',
-            20: 'Seafoam Islands',
-        },
-        1: {
-            33: 'Union Cave',
-            34: 'Ilex Forest',
-        },
         2: {
             116: 'Petalburg Woods',
             110: 'Granite Cave',
@@ -582,142 +496,6 @@ namespace GameConstants {
         'Aerodactyl': 'amber',
 
     };
-
-    // For random quest, name matches entry in gymList (created in Gym.ts)
-    export const KantoGyms = [
-        'Pewter City',
-        'Cerulean City',
-        'Vermillion City',
-        'Celadon City',
-        'Saffron City',
-        'Fuchsia City',
-        'Cinnabar Island',
-        'Viridian City',
-        'Elite Lorelei',
-        'Elite Bruno',
-        'Elite Agatha',
-        'Elite Lance',
-        'Champion Blue',
-    ];
-
-    export const JohtoGyms = [
-        'Violet City',
-        'Azalea Town',
-        'Goldenrod City',
-        'Ecruteak City',
-        'Cianwood City',
-        'Olivine City',
-        'Mahogany Town',
-        'Blackthorn City',
-        'Elite Will',
-        'Elite Koga',
-        'Elite Bruno2',
-        'Elite Karen',
-        'Champion Lance',
-    ];
-
-    export const HoennGyms = [
-        'Rustboro City',
-        'Dewford Town',
-        'Mauville City',
-        'Lavaridge Town',
-        'Petalburg City',
-        'Fortree City',
-        'Mossdeep City',
-        'Sootopolis City',
-        'Elite Sidney',
-        'Elite Phoebe',
-        'Elite Glacia',
-        'Elite Drake',
-        'Champion Wallace',
-    ];
-
-    export const RegionGyms = [
-        KantoGyms,
-        JohtoGyms,
-        HoennGyms,
-    ];
-
-    export const KantoDungeons = [
-        'Viridian Forest',
-        'Digletts Cave',
-        'Mt. Moon',
-        'Rock Tunnel',
-        'Power Plant',
-        'Pokemon Tower',
-        'Seafoam Islands',
-        'Pokemon Mansion',
-        'Victory Road',
-        'Cerulean Cave',
-    ];
-
-    export const JohtoDungeons = [
-        'Sprout Tower',
-        'Ruins of Alph',
-        'Union Cave',
-        'Slowpoke Well',
-        'Ilex Forest',
-        'Burned Tower',
-        'Tin Tower',
-        'Whirl Islands',
-        'Mt Mortar',
-        'Ice Path',
-        'Dark Cave',
-        'Mt Silver',
-    ];
-
-    export const HoennDungeons = [
-        'Rusturf Tunnel',
-        'Granite Cave',
-        'Jagged Pass',
-        'Fiery Path',
-        'Mt. Chimney',
-        'Meteor Falls',
-        'Mt. Pyre',
-        'Shoal Cave',
-        'Seafloor Cavern',
-        'Cave of Origin',
-        'Sky Pillar',
-        'Victory Road Hoenn',
-        'Petalburg Woods',
-        'New Mauville',
-        'Sea Mauville',
-        // These aren't implemented anywhere yet
-        /*
-        "Island Cave",
-        "Desert Ruins",
-        "Scorched Slab",
-        "Ancient Tomb",
-        "Aqua Hideout",
-        "Magma Hideout",
-        "Sealed Chamber",
-        "Artisan Cave",
-        "Desert Underpass",
-        "Marine Cave",
-        "Terra Cave",
-        "Southern Island",
-        "Faraway Island",
-        "Birth Island",
-        "Devon Corporation",
-        "Oceanic Museum",
-        "Mirage Tower",
-        "Weather Institute",
-        "Safari Zone",
-        "Mirage Island",
-        "Battle Tower",
-        "Trainer Hill",
-        "Abandoned Ship",
-        "Battle Maison",
-        "Battle Resort",
-        "Mirage Spots",
-        */
-    ];
-
-    export const RegionDungeons = [
-        KantoDungeons,
-        JohtoDungeons,
-        HoennDungeons,
-    ];
 
     export const StartingTowns = [
         'Pallet Town',
