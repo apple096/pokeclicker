@@ -757,4 +757,384 @@ class RegionFactory {
 
         return new Region(RegionName.hoenn, 135, routes, gyms, shops, dungeons);
     }
+    
+    static createSinnoh(): Region {
+
+        const routes: Route[] = [
+            RouteFactory.createRoute(201, {
+                land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
+                water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }),
+            RouteFactory.createRoute(202, {
+                land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
+                water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(201)]),
+            RouteFactory.createRoute(203, {
+                land: ['Ponyta', 'Tangela', 'Donphan', 'Ursaring', 'Rapidash', 'Doduo', 'Dodrio', 'Sneasel', 'Murkrow'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Natu', 'Aipom', 'Heracross'],
+            }, [new RouteRequirement(202)]),
+            RouteFactory.createRoute(204, {
+                land: ['Pidgey', 'Rattata', 'Sentret', 'Hoothoot'],
+                water: [],
+                headbutt: ['Exeggcute', 'Ledyba', 'Spinarak', 'Hoothoot', 'Pineco'],
+            } [new RouteRequirement(202)]),
+            RouteFactory.createRoute(30, {
+                land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(29)]),
+            RouteFactory.createRoute(31, {
+                land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Spearow', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Aipom', 'Pineco', 'Heracross'],
+            }, [new RouteRequirement(30)]),
+            RouteFactory.createRoute(32, {
+                land: ['Rattata', 'Ekans', 'Zubat', 'Bellsprout', 'Mareep', 'Hoppip', 'Wooper'],
+                water: ['Tentacool', 'Tentacruel', 'Quagsire', 'Magikarp', 'Qwilfish'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Zephyr)]),
+            RouteFactory.createRoute(33, {
+                land: ['Spearow', 'Rattata', 'Ekans', 'Zubat', 'Hoppip'],
+                water: [],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new RouteRequirement(32), new DungeonRequirement(DungeonName.Union_Cave)]),
+            RouteFactory.createRoute(34, {
+                land: ['Rattata', 'Abra', 'Drowzee', 'Ditto'],
+                water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Hive), new DungeonRequirement(DungeonName.Ilex_Forest)]),
+            RouteFactory.createRoute(35, {
+                land: ['Pidgey', 'Nidoran(F)', 'Nidoran(M)', 'Abra', 'Drowzee', 'Ditto', 'Hoothoot', 'Yanma'],
+                water: ['Psyduck', 'Golduck', 'Poliwag', 'Magikarp'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Plain)]),
+            RouteFactory.createRoute(36, {
+                land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(35)]),
+            RouteFactory.createRoute(37, {
+                land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(36)]),
+            RouteFactory.createRoute(38, {
+                land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Snubbull', 'Miltank'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Fog)]),
+            RouteFactory.createRoute(39, {
+                land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Miltank'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(38)]),
+            RouteFactory.createRoute(40, {
+                land: [],
+                water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+                headbutt: [],
+            }, [new RouteRequirement(39)], true),
+            RouteFactory.createRoute(41, {
+                land: [],
+                water: ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Chinchou', 'Shellder'],
+                headbutt: [],
+            }, [new RouteRequirement(40)], true),
+            RouteFactory.createRoute(42, {
+                land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
+                water: ['Goldeen', 'Seaking', 'Magikarp'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Mineral)]),
+            RouteFactory.createRoute(43, {
+                land: ['Pidgeotto', 'Venonat', 'Noctowl', 'Mareep', 'Flaaffy', 'Girafarig'],
+                water: ['Magikarp', 'Poliwag'],
+                headbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Glacier)]),
+            RouteFactory.createRoute(44, {
+                land: ['Bellsprout', 'Weepinbell', 'Lickitung', 'Tangela'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Glacier)]),
+            RouteFactory.createRoute(45, {
+                land: ['Geodude', 'Graveler', 'Gligar', 'Teddiursa', 'Skarmory', 'Phanpy'],
+                water: ['Magikarp', 'Poliwag'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Rising)]),
+            RouteFactory.createRoute(46, {
+                land: ['Spearow', 'Rattata', 'Geodude'],
+                water: [],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new RouteRequirement(45)]),
+        ];
+
+        const shops: Shop[] = [
+            new Shop(ShopName.New_Bark_Town, ['Pokeball']),
+            new Shop(ShopName.Cherrygrove_City, ['Greatball']),
+            new Shop(ShopName.Violet_City, ['MediumRestore', 'Togepi']),
+            new Shop(ShopName.Azalea_Town, ['Kings_rock']),
+            new Shop(ShopName.Goldenrod_City, ['Sun_stone', 'Upgrade']),
+            new Shop(ShopName.Olivine_City, ['Metal_coat']),
+            new Shop(ShopName.Cianwood_City, ['Ultraball', 'Time_stone']),
+            new Shop(ShopName.Blackthorn_City, ['LargeRestore', 'Dragon_scale']),
+        ];
+
+        const gyms: Gym[] = [
+            new Gym(
+                GymLeaderName.Roark,
+                [
+                    new GymPokemon('Geodude', 38000, 12),
+                    new GymPokemon('Onix', 42000, 12),
+                    new GymPokemon('Cranidos', 42000, 14),
+                ],
+                BadgeCase.Badge.Coal,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Champion_Wallace)],
+                'This is embarrassing... I went and lost to a Trainer who didnt have a single Gym Badge... But thats tough. You were strong, and I was weak. Thats all there is. According to Pokémon League rules, I have to give you our Gym Badge since youve beaten me, the Leader. Heres your official Pokémon League Coal Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Bugsy,
+                [
+                    new GymPokemon('Turtwig', 33000, 20),
+                    new GymPokemon('Cherrim', 37500, 20),
+                    new GymPokemon('Roserade', 39000, 22),
+                ],
+                BadgeCase.Badge.Forest,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Coal)],
+                'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Whitney,
+                [
+                    new GymPokemon('Clefairy', 50000, 17),
+                    new GymPokemon('Miltank', 80000, 19),
+                ],
+                BadgeCase.Badge.Plain,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Hive)],
+                '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Morty,
+                [
+                    new GymPokemon('Gastly', 37000, 21),
+                    new GymPokemon('Haunter', 38000, 21),
+                    new GymPokemon('Haunter', 40000, 23),
+                    new GymPokemon('Gengar', 42000, 25),
+                ],
+                BadgeCase.Badge.Fog,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Plain)],
+                'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
+            ),
+            new Gym(
+                GymLeaderName.Chuck,
+                [
+                    new GymPokemon('Primeape', 87000, 29),
+                    new GymPokemon('Poliwrath', 93000, 31),
+                ],
+                BadgeCase.Badge.Storm,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Fog)],
+                'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!'
+            ),
+            new Gym(
+                GymLeaderName.Jasmine,
+                [
+                    new GymPokemon('Magnemite', 67000, 30),
+                    new GymPokemon('Magnemite', 68000, 30),
+                    new GymPokemon('Steelix', 72000, 35),
+                ],
+                BadgeCase.Badge.Mineral,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Storm)],
+                '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Pryce,
+                [
+                    new GymPokemon('Seel', 70000, 30),
+                    new GymPokemon('Dewgong', 72500, 32),
+                    new GymPokemon('Piloswine', 76000, 34),
+                ],
+                BadgeCase.Badge.Glacier,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Mineral)],
+                'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!'
+            ),
+            new Gym(
+                GymLeaderName.Clair,
+                [
+                    new GymPokemon('Dragonair', 65000, 38),
+                    new GymPokemon('Dragonair', 65000, 38),
+                    new GymPokemon('Gyarados', 78000, 38),
+                    new GymPokemon('Kingdra', 80000, 41),
+                ],
+                BadgeCase.Badge.Rising,
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Glacier)],
+                'Here, this is the Rising Badge... Hurry up! Take it!'
+            ),
+            new Gym(
+                GymLeaderName.Will,
+                [
+                    new GymPokemon('Xatu', 45330, 40),
+                    new GymPokemon('Jynx', 48300, 41),
+                    new GymPokemon('Exeggutor', 52000, 41),
+                    new GymPokemon('Slowbro', 57000, 41),
+                    new GymPokemon('Xatu', 60250, 42),
+                ],
+                BadgeCase.Badge.Elite_Will,
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Rising)],
+                'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.'
+            ),
+            new Gym(
+                GymLeaderName.Koga2,
+                [
+                    new GymPokemon('Ariados', 45330, 40),
+                    new GymPokemon('Venomoth', 48300, 41),
+                    new GymPokemon('Forretress', 52000, 43),
+                    new GymPokemon('Muk', 57000, 42),
+                    new GymPokemon('Crobat', 60250, 44),
+                ],
+                BadgeCase.Badge.Elite_Koga,
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Will)],
+                'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!'
+            ),
+            new Gym(
+                GymLeaderName.Bruno2,
+                [
+                    new GymPokemon('Hitmontop', 45330, 42),
+                    new GymPokemon('Hitmonlee', 48300, 42),
+                    new GymPokemon('Hitmonchan', 52000, 42),
+                    new GymPokemon('Onix', 57000, 43),
+                    new GymPokemon('Machamp', 60250, 46),
+                ],
+                BadgeCase.Badge.Elite_Bruno2,
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Koga)],
+                'Having lost, I have no right to say anything… Go face your next challenge!'
+            ),
+            new Gym(
+                GymLeaderName.Karen,
+                [
+                    new GymPokemon('Umbreon', 48300, 42),
+                    new GymPokemon('Vileplume', 52000, 42),
+                    new GymPokemon('Gengar', 57000, 45),
+                    new GymPokemon('Murkrow', 60250, 44),
+                    new GymPokemon('Houndoom', 66000, 47),
+                ],
+                BadgeCase.Badge.Elite_Karen,
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Bruno2)],
+                'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.'
+            ),
+            new Gym(
+                GymLeaderName.Lance2,
+                [
+                    new GymPokemon('Gyarados', 58300, 44),
+                    new GymPokemon('Dragonite', 62000, 49),
+                    new GymPokemon('Dragonite', 64000, 49),
+                    new GymPokemon('Aerodactyl', 60250, 48),
+                    new GymPokemon('Dragonite', 70000, 50),
+                ],
+                BadgeCase.Badge.Elite_JohtoChampion,
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)],
+                '…It\'s over. But it\'s an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!'
+            ),
+        ];
+
+        const dungeons: Dungeon[] = [
+            new Dungeon(DungeonName.Sprout_Tower,
+                ['Rattata', 'Gastly', 'Hoothoot'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
+                28735,
+                [new DungeonBossPokemon('Bellsprout', 2000, 10)],
+                2500, [new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)], 31, 5
+            ),
+            new Dungeon(DungeonName.Ruins_of_Alph,
+                ['Natu', 'Wooper', 'Quagsire', 'Smeargle', 'Magikarp', 'Poliwag', 'Poliwhirl'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                600,
+                [new DungeonBossPokemon('Unown', 3000, 14)],
+                3000, [new BadgeRequirement(BadgeCase.Badge.Zephyr)], 32, 7
+            ),
+            new Dungeon(DungeonName.Union_Cave,
+                ['Rattata', 'Sandshrew', 'Zubat', 'Geodude', 'Onix', 'Goldeen', 'Magikarp'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                600,
+                [new DungeonBossPokemon('Wooper', 3000, 14)],
+                3000, [new BadgeRequirement(BadgeCase.Badge.Zephyr)], 32, 7
+            ),
+            new Dungeon(DungeonName.Slowpoke_Well,
+                ['Zubat', 'Slowpoke'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+                900,
+                [new DungeonBossPokemon('Slowbro', 4000, 20)],
+                3500, [new BadgeRequirement(BadgeCase.Badge.Zephyr)], 33, 12
+            ),
+            new Dungeon(DungeonName.Ilex_Forest,
+                ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Oddish', 'Paras', 'Hoothoot'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+                1200,
+                [new DungeonBossPokemon('Noctowl', 5000, 30), new DungeonBossPokemon('Beedrill', 5000, 30), new DungeonBossPokemon('Butterfree', 5000, 30), new DungeonBossPokemon('Celebi', 300000, 50)],
+                4000, [new BadgeRequirement(BadgeCase.Badge.Hive)], 34, 15
+            ),
+            new Dungeon(DungeonName.Burned_Tower,
+                ['Rattata', 'Zubat', 'Koffing', 'Raticate'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+                1500,
+                [new DungeonBossPokemon('Golbat', 6000, 35), new DungeonBossPokemon('Weezing', 6000, 35), new DungeonBossPokemon('Shuckle', 300000, 50)],
+                4500, [new BadgeRequirement(BadgeCase.Badge.Fog)], 37, 20
+            ),
+            new Dungeon(DungeonName.Tin_Tower,
+                ['Rattata', 'Gastly'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                1500,
+                [new DungeonBossPokemon('Raticate', 6000, 35), new DungeonBossPokemon('Haunter', 6000, 35), new DungeonBossPokemon('Ho-Oh', 300000, 70)],
+                4500, [new BadgeRequirement(BadgeCase.Badge.Fog)], 37, 20
+            ),
+            new Dungeon(DungeonName.Whirl_Islands,
+                ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
+                1800,
+                [new DungeonBossPokemon('Dewgong', 7000, 40), new DungeonBossPokemon('Kingler', 7000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
+                5000, [new BadgeRequirement(BadgeCase.Badge.Storm)], 41, 25
+            ),
+            new Dungeon(DungeonName.Mt_Mortar,
+                ['Rattata', 'Zubat', 'Geodude', 'Marill', 'Raticate', 'Golbat', 'Graveler'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+                2100,
+                [new DungeonBossPokemon('Tyrogue', 8000, 45)],
+                5500, [new BadgeRequirement(BadgeCase.Badge.Storm)], 42, 30
+            ),
+            new Dungeon(DungeonName.Ice_Path,
+                ['Zubat', 'Jynx', 'Swinub'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
+                2400,
+                [new DungeonBossPokemon('Delibird', 9000, 50)],
+                6000, [new BadgeRequirement(BadgeCase.Badge.Glacier)], 44, 32
+            ),
+            new Dungeon(DungeonName.Dark_Cave,
+                ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
+                [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                3000,
+                [new DungeonBossPokemon('Dunsparce', 10000, 55)],
+                6500, [new BadgeRequirement(BadgeCase.Badge.Rising)], 45, 35
+            ),
+            new Dungeon(DungeonName.Mt_Silver,
+                ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+                3500,
+                [new DungeonBossPokemon('Larvitar', 12000, 60)],
+                10000, [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)], 28, 50
+            ),
+        ];
+
+        return new Region(RegionName.johto, 100, routes, gyms, shops, dungeons);
+    }
 }
