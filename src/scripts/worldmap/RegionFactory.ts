@@ -926,7 +926,7 @@ class RegionFactory {
                 BadgeCase.Badge.Cobble,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Relic)],
-                'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
+                '...OK. You win. That was a tough loss. I learned a lot from it. Please, accept this Gym Badge.'
             ),
             new Gym(
                 GymLeaderName.Crasher_Wake,
@@ -938,7 +938,7 @@ class RegionFactory {
                 BadgeCase.Badge.Fen,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Cobble)],
-                'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!'
+                'It seems the undertow pulled me under... But I had a great time battling with you! You\'ve earned this!'
             ),
             new Gym(
                 GymLeaderName.Byron,
@@ -950,7 +950,7 @@ class RegionFactory {
                 BadgeCase.Badge.Mine,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Fen)],
-                '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
+                'You were strong enough to take down my prized team of Pokémon. In recognition of that power, I give you this: the Mine Badge!'
             ),
             new Gym(
                 GymLeaderName.Candice,
@@ -963,7 +963,7 @@ class RegionFactory {
                 BadgeCase.Badge.Icicle,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Mine)],
-                'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!'
+                'Wow! You\'re great! You\'ve earned my respect! I think your focus and will bowled us over totally. Oh, that\'s right! I\'m supposed to give you this!'
             ),
             new Gym(
                 GymLeaderName.Volkner,
@@ -976,7 +976,7 @@ class RegionFactory {
                 BadgeCase.Badge.Beacon,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Icicle)],
-                'Here, this is the Rising Badge... Hurry up! Take it!'
+                '...Hehehe. Hahahah! ...That was the most fun I\'ve had in a battle since...I don\'t know when! It\'s also made me excited to know you and your team will keep battling to greater heights! This is your eighth Gym Badge. You\'ve earned this!'
             ),
             new Gym(
                 GymLeaderName.Aaron,
@@ -990,7 +990,7 @@ class RegionFactory {
                 BadgeCase.Badge.Elite_Aaron,
                 7500,
                 [new BadgeRequirement(BadgeCase.Badge.Beacon)],
-                'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.'
+                'I lost with the most beautiful and toughest of the bug Pokémon... We lost because I wasn\'t good enough... That\'s it! Back to training camp! Let\'s hear it for me! No... That was wrong... Anyway... Go on to the next room! Three Trainers are waiting for you. They are all tougher than me.'
             ),
             new Gym(
                 GymLeaderName.Bertha,
@@ -1004,7 +1004,7 @@ class RegionFactory {
                 BadgeCase.Badge.Elite_Bertha,
                 7500,
                 [new BadgeRequirement(BadgeCase.Badge.Elite_Aaron)],
-                'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!'
+                'You\'re quite something, youngster. I like how you and your Pokémon earned the win by working as one. That\'s what makes you so strong. Ahahaha! I think that you can go as far as you want.'
             ),
             new Gym(
                 GymLeaderName.Flint,
@@ -1018,7 +1018,7 @@ class RegionFactory {
                 BadgeCase.Badge.Elite_Flint,
                 7500,
                 [new BadgeRequirement(BadgeCase.Badge.Elite_Bertha)],
-                'Having lost, I have no right to say anything… Go face your next challenge!'
+                '...! I don\'t believe it! I lost! I didn\'t take you for granted. Bud I\'d never even considered it! I\'m blown away by this! You and your Pokémon are hot stuff!'
             ),
             new Gym(
                 GymLeaderName.Lucian,
@@ -1032,7 +1032,7 @@ class RegionFactory {
                 BadgeCase.Badge.Elite_Lucian,
                 7500,
                 [new BadgeRequirement(BadgeCase.Badge.Elite_Flint)],
-                'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.'
+                'Congratulations. You have beaten the Elite Four. However, that doesn\'t mean you\'re done with the Pokémon league. There remains the Champion. I should warn you—the Champion is far stronger than the Elite Four. Now, go on. Step through the doorway to your final battle.'
             ),
             new Gym(
                 GymLeaderName.Cynthia,
@@ -1047,7 +1047,7 @@ class RegionFactory {
                 BadgeCase.Badge.Elite_SinnohChampion,
                 7500,
                 [new BadgeRequirement(BadgeCase.Badge.Elite_Lucian)],
-                '…It\'s over. But it\'s an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!'
+                'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion! Come with me. We\'ll take the lift.'
             ),
         ];
 
