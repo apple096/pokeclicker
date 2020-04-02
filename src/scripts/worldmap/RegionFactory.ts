@@ -1037,12 +1037,12 @@ class RegionFactory {
             new Gym(
                 GymLeaderName.Cynthia,
                 [
-                    new GymPokemon('Spiritomb', 58300, 44),
-                    new GymPokemon('Roserade', 62000, 49),
-                    new GymPokemon('Togekiss', 64000, 49),
-                    new GymPokemon('Lucario', 60250, 48),
-                    new GymPokemon('Milotic', 70000, 50),
-                    new GymPokemon('Garchomp', 70000, 50),
+                    new GymPokemon('Spiritomb', 58300, 58),
+                    new GymPokemon('Roserade', 62000, 58),
+                    new GymPokemon('Togekiss', 64000, 58),
+                    new GymPokemon('Lucario', 60250, 60),
+                    new GymPokemon('Milotic', 70000, 58),
+                    new GymPokemon('Garchomp', 70000, 62),
                 ],
                 BadgeCase.Badge.Elite_SinnohChampion,
                 7500,
