@@ -890,10 +890,10 @@ class RegionFactory {
                 BadgeCase.Badge.Coal,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Champion_Wallace)],
-                'This is embarrassing... I went and lost to a Trainer who didnt have a single Gym Badge... But thats tough. You were strong, and I was weak. Thats all there is. According to Pokémon League rules, I have to give you our Gym Badge since youve beaten me, the Leader. Heres your official Pokémon League Coal Badge.'
+                'This is embarrassing... I went and lost to a Trainer who didn\'t have a single Gym Badge... But that\'s tough. You were strong, and I was weak. That\'s all there is. According to Pokémon League rules, I have to give you our Gym Badge since you\'ve beaten me, the Leader. Heres your official Pokémon League Coal Badge.'
             ),
             new Gym(
-                GymLeaderName.Bugsy,
+                GymLeaderName.Gardenia,
                 [
                     new GymPokemon('Turtwig', 33000, 20),
                     new GymPokemon('Cherrim', 37500, 20),
@@ -902,18 +902,19 @@ class RegionFactory {
                 BadgeCase.Badge.Forest,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Coal)],
-                'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.'
+                'I might\'ve said it before, but you\'re really tough! Wasn\'t it hard for you to raise your Pokémon to be so good? I guess that\'s a measure of how much you love your Pokémon. In recognition of that, I proudly grant you this!"'
             ),
             new Gym(
-                GymLeaderName.Whitney,
+                GymLeaderName.Fantina,
                 [
-                    new GymPokemon('Clefairy', 50000, 17),
-                    new GymPokemon('Miltank', 80000, 19),
+                    new GymPokemon('Duskull', 50000, 24),
+                    new GymPokemon('Haunter', 80000, 24),
+                    new GymPokemon('Mismagius', 80000, 26),
                 ],
-                BadgeCase.Badge.Plain,
+                BadgeCase.Badge.Relic,
                 500,
-                [new BadgeRequirement(BadgeCase.Badge.Hive)],
-                '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.'
+                [new BadgeRequirement(BadgeCase.Badge.Forest)],
+                'I am dumbfounded! So very, very strong! You, your Pokémon, so strong! Your power is admirable! I shall honor it with this Gym Badge!"'
             ),
             new Gym(
                 GymLeaderName.Morty,
