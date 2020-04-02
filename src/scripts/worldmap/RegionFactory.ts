@@ -917,49 +917,50 @@ class RegionFactory {
                 'I am dumbfounded! So very, very strong! You, your Pokémon, so strong! Your power is admirable! I shall honor it with this Gym Badge!"'
             ),
             new Gym(
-                GymLeaderName.Morty,
+                GymLeaderName.Maylene,
                 [
-                    new GymPokemon('Gastly', 37000, 21),
-                    new GymPokemon('Haunter', 38000, 21),
-                    new GymPokemon('Haunter', 40000, 23),
-                    new GymPokemon('Gengar', 42000, 25),
+                    new GymPokemon('Meditite', 37000, 28),
+                    new GymPokemon('Machoke', 38000, 29),
+                    new GymPokemon('Lucario', 40000, 32),
                 ],
-                BadgeCase.Badge.Fog,
+                BadgeCase.Badge.Cobble,
                 500,
-                [new BadgeRequirement(BadgeCase.Badge.Plain)],
+                [new BadgeRequirement(BadgeCase.Badge.Relic)],
                 'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
             ),
             new Gym(
-                GymLeaderName.Chuck,
+                GymLeaderName.Crasher_Wake,
                 [
-                    new GymPokemon('Primeape', 87000, 29),
-                    new GymPokemon('Poliwrath', 93000, 31),
+                    new GymPokemon('Gyarados', 87000, 33),
+                    new GymPokemon('Quagsire', 93000, 34),
+                    new GymPokemon('Floatzel', 93000, 37),
                 ],
-                BadgeCase.Badge.Storm,
+                BadgeCase.Badge.Fen,
                 500,
-                [new BadgeRequirement(BadgeCase.Badge.Fog)],
+                [new BadgeRequirement(BadgeCase.Badge.Cobble)],
                 'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!'
             ),
             new Gym(
-                GymLeaderName.Jasmine,
+                GymLeaderName.Byron,
                 [
-                    new GymPokemon('Magnemite', 67000, 30),
-                    new GymPokemon('Magnemite', 68000, 30),
-                    new GymPokemon('Steelix', 72000, 35),
+                    new GymPokemon('Magneton', 67000, 37),
+                    new GymPokemon('Steelix', 72000, 38),
+                    new GymPokemon('Magnemite', 68000, 41),
                 ],
-                BadgeCase.Badge.Mineral,
+                BadgeCase.Badge.Mine,
                 500,
-                [new BadgeRequirement(BadgeCase.Badge.Storm)],
+                [new BadgeRequirement(BadgeCase.Badge.Fen)],
                 '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
             ),
             new Gym(
-                GymLeaderName.Pryce,
+                GymLeaderName.Candice,
                 [
-                    new GymPokemon('Seel', 70000, 30),
-                    new GymPokemon('Dewgong', 72500, 32),
-                    new GymPokemon('Piloswine', 76000, 34),
+                    new GymPokemon('Sneasel', 72500, 40),
+                    new GymPokemon('Piloswine', 76000, 40),
+                    new GymPokemon('Abomasnow', 70000, 42),
+                    new GymPokemon('Froslass', 70000, 44),
                 ],
-                BadgeCase.Badge.Glacier,
+                BadgeCase.Badge.Icicle,
                 500,
                 [new BadgeRequirement(BadgeCase.Badge.Mineral)],
                 'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!'
