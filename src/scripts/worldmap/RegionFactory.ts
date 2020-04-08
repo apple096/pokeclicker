@@ -1122,11 +1122,18 @@ class RegionFactory {
                 [new DungeonBossPokemon('Delibird', 9000, 50)],
                 6000, [new BadgeRequirement(BadgeCase.Badge.Glacier)], 44, 32
             ),
-            new Dungeon(DungeonName.Dark_Cave,
+            new Dungeon(DungeonName.Spearhead_Tower,
                 ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
                 [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
                 3000,
-                [new DungeonBossPokemon('Dunsparce', 10000, 55)],
+                [new DungeonBossPokemon('Palkia', 10000, 70)],[new DungeonBossPokemon('Dialga', 10000, 70)],[new DungeonBossPokemon('Giratina', 10000, 70)],
+                6500, [new BadgeRequirement(BadgeCase.Badge.Rising)], 45, 35
+            ),
+            new Dungeon(DungeonName.Hall_of_Legend,
+                ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
+                [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                3000,
+                [new DungeonBossPokemon('Arceus', 10000, 70)],
                 6500, [new BadgeRequirement(BadgeCase.Badge.Rising)], 45, 35
             ),
             new Dungeon(DungeonName.Mt_Silver,
