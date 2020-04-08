@@ -14172,6 +14172,25 @@ const pokemonList: {
                 'speed': 34,
             },
         },
+        {
+            'id': 69420666,
+            'name': 'RedSparr0w',
+            'type': [PokemonType.Steel, PokemonType.Normal, PokemonType.Psychic, 
+            PokemonType.Fairy, PokemonType.Grass, PokemonType.Water, PokemonType.Fire, PokemonType.Electric, 
+            PokemonType.Ground, PokemonType.Fighting, PokemonType.Dragon, PokemonType.Toxic],
+            'eggCycles': 420,
+            'levelType': LevelType.slow,
+            'exp': 69420,
+            'catchRate': 1,
+            'base': {
+                'hitpoints': 69420666,
+                'attack': 69420666,
+                'specialAttack': 69420666,
+                'defense': 69420666,
+                'specialDefense': 69420666,
+                'speed': 69420666,
+            },
+        },
     ];
 
 
