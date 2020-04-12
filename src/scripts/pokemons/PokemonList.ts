@@ -14484,7 +14484,7 @@ const pokemonList: {
         {
             'id': 69420666,
             'name': 'RedSparr0w',
-            'type': [PokemonType.Dev],
+            'type': [PokemonType.Normal],
             'eggCycles': 420,
             'levelType': LevelType.slow,
             'exp': 69420,
