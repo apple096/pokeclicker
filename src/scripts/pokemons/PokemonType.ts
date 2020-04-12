@@ -18,4 +18,5 @@ enum PokemonType {
     'Dark' = 15,
     'Steel' = 16,
     'Fairy' = 17,
+    'Dev' = 18;
 }
