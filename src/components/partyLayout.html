@@ -1,38 +1,26 @@
-<div id="breedingDisplay" class="card sortable border-secondary mb-3" data-bind="visible: App.game.breeding.canAccess()">
-    <div class="card-header p-0" data-toggle="collapse" href="#eggList">
-        <span>Party</span>
-    </div>
-    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-            data-bind='click: function(){ BreedingController.openBreedingModal() }'>
-        List
-    </button>
-    <div id='eggList' class="card-body p-0 show">
-      <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
-        <div class="col-3 col-md-6 p-0 eggSlot">
-          <div class="content">
-            <div data-bind="if: $index() === App.game.breeding.eggSlots">
-                <p>
-                  <br/>
-                  <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
-                </p>
-                <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
-                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
-            </div>
-            <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
-                <img src="assets/images/breeding/lock.svg">
-            </div>
-            <!-- ko ifnot: $data.isNone() -->
-            <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
-                <!-- ko if: $data.type == EggType.Fossil -->
-                <img data-bind='attr: {src: PartySlotController.getPokemonImage($data)}'/>
-                <!-- /ko -->
-                <!-- ko ifnot: $data.type == EggType.Fossil -->
-                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}"></div>
-                <!-- /ko -->
-            </div>
-            <!-- /ko -->
+<div id="pokemonMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.breeding.canAccess()">
+  <div class="card-header p-0" data-toggle="collapse" href="#eggList">
+      <span>Party</span>
+  </div>
+  <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+          data-bind='click: function(){ PartySlotController.openPartySlotModal() }'>
+      List
+  </button>
+  <div id='pokemonMap' class="card-body p-0 show">
+    <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
+      <div class="col-4 col-4 p-0 eggSlot">
+        <div class="content">
+          <!-- ko ifnot: $data.isNone() -->
+          <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
+              <!-- ko ifnot: $data.type == EggType.Fossil -->
+              <div data-bind='attr: {src: PartySlotController.getPokemonImage($data.id)}'>
+                  <img data-bind="attr:{ src: PartySlotController.getPokemonImage($data.pokemon) }">
+              </div>
+              <!-- /ko -->
           </div>
+          <!-- /ko -->
         </div>
       </div>
     </div>
+  </div>
 </div>
