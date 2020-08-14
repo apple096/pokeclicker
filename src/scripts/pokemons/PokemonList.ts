@@ -29,6 +29,7 @@ type PokemonListData = {
   baby?: boolean;
   attack?: number;
   heldItem?: string;
+  ability?: string;
 }
 
 /**
