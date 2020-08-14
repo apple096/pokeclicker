@@ -6,6 +6,13 @@
           data-bind='click: function(){ PartySlotController.openPartySlotModal() }'>
       List
   </button>
+  <style>
+    .mult {
+        position: relative;
+        left: -10;
+        top: 20;
+    }
+  </style>
   <div id='pokemonMap' class="card-body p-0 show">
     <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
       <div class="col-4 col-4 p-0 eggSlot">
@@ -15,7 +22,7 @@
               <!-- ko ifnot: $data.type == EggType.Fossil -->
               <div data-bind='attr: {src: PartySlotController.getPokemonImage($data.id)}'>
                   <img data-bind="attr:{ src: PartySlotController.getPokemonImage($data.pokemon) }">
-                  <h1 data-bind="text: $data.attack">attack
+                  <span class="mult" data-bind="text: PartySlotController.getPokemonMultiplier($data.pokemon)">attack</span>
               </div>
               <!-- /ko -->
           </div>
