@@ -8,11 +8,15 @@ class PartySlotController {
             $('partyLayout').modal('show');
         }
     }
+    public static getPokemonMultiplierText(pokemon: string) {
+        return `x${this.getPokemonMultiplier(pokemon)}`;
+    }
+
     public static getPokemonMultiplier(pokemon: string) {
         let pAttack = PokemonHelper.getPokemonByName(pokemon).attack;
         if (pAttack <= 150) {
             return;
         }
-        return `x${(100 + Math.round(pAttack / 100)) / 100}`;
+        return Math.max((100 + Math.round(pAttack / 100)) / 100, 1);
     }
 }
