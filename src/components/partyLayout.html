@@ -15,6 +15,7 @@
               <!-- ko ifnot: $data.type == EggType.Fossil -->
               <div data-bind='attr: {src: PartySlotController.getPokemonImage($data.id)}'>
                   <img data-bind="attr:{ src: PartySlotController.getPokemonImage($data.pokemon) }">
+                  <h1 data-bind="text: $data.attack">attack
               </div>
               <!-- /ko -->
           </div>
