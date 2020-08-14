@@ -22,7 +22,7 @@
               <!-- ko ifnot: $data.type == EggType.Fossil -->
               <div data-bind='attr: {src: PartySlotController.getPokemonImage($data.id)}'>
                   <img data-bind="attr:{ src: PartySlotController.getPokemonImage($data.pokemon) }">
-                  <span class="mult" data-bind="text: PartySlotController.getPokemonMultiplier($data.pokemon)">attack</span>
+                  <span class="mult" style="left: -10px;top: 22px;" data-bind="text: PartySlotController.getPokemonMultiplier($data.pokemon)">attack</span>
               </div>
               <!-- /ko -->
           </div>
