@@ -5,7 +5,7 @@ class PartySlotController {
     }
     public static openPartySlotModal() {
         if (App.game.breeding.canAccess()) {
-            $('#partySlotModal').modal('show');
+            $('partyLayout').modal('show');
         }
     }
 }
