@@ -15,7 +15,7 @@ class PartySlotController {
     public static getPokemonMultiplier(pokemon: string) {
         const pAttack = PokemonHelper.getPokemonByName(pokemon).attack;
         if (pAttack <= 100) {
-            return PokemonHelper.getPokemonByName(pokemon).ability;;
+            return PokemonHelper.getPokemonByName(pokemon).ability;
         }
         return Math.max((100 + Math.round(pAttack / 100)) / 100, 1);
     }
