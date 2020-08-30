@@ -618,11 +618,27 @@ namespace GameConstants {
         'Champion Cynthia',
     ];
 
+    export const UnovaGyms = [
+    ];
+
+    export const KalosGyms = [
+    ];
+
+    export const AlolaGyms = [
+    ];
+
+    export const GalarGyms = [
+    ];
+
     export const RegionGyms = [
         KantoGyms,
         JohtoGyms,
         HoennGyms,
         SinnohGyms,
+        UnovaGyms,
+        KalosGyms,
+        AlolaGyms,
+        GalarGyms,
     ];
 
     export const KantoDungeons = [
@@ -721,6 +737,18 @@ namespace GameConstants {
         'Flower Paradise',
         'Snowpoint Temple',
         'Stark Mountain',
+    ];
+
+    export const UnovaDungeons = [
+    ];
+
+    export const KalosDungeons = [
+    ];
+
+    export const AlolaDungeons = [
+    ];
+
+    export const GalarDungeons = [
     ];
 
     export const RegionDungeons = [
