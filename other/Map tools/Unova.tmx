@@ -44,12 +44,12 @@
  </layer>
  <layer id="7" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXOUJAAIEDBSgMSAA3f8vRroLACk90czMvPAAO5UEL/AAKHnIO4g3POGYqhq85dVLCnrnjOKZA2SokAlBkgDQAglhZsQMEsAQVDgEKoFIsEIwQrBCQBFABAgBCHKAVQ9VCB2ihlThSZnJ+UQdX3s5avFKl5qP81+y/ZhXvJKl5oPyL7h+jCIwayXXc85VwxvqLfwafevyQTjrPGdlL1fG9P1QfaXD2f2c5etdBel7ufpOxekO3L6cXnpXu9Z00RYD2QAdTC08qQibK5sLpbuxzyl9mwmssEVzo5HrqJ27uuj/anHrBhgblHRZua6spmgNwEnYYxE6rgB7SiZN5lPkgWz5jy3bJJwAcUi2TIhDMsnpD74jRe4jF/X9wfINqjQGOGzdcopODkaH4XMHMFEfBowWcBJqMlX3gxo/pY9wCD8=
+   KLUv/WDAXAUIANQDAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIKBgYFtDwAAbg8AAG91DwAAdg8AAHd9DwAAfg8AAH+BfEiokAlBmgDgAglngFAHEqAQZFAEKoFFsEPw/ywBikitB4EwGxVbPOwiF//i8hQfoxXMveR6Bhm9Bn9d5vQRo5ucXi759H1GfT99It+k7V389L2mvphxunZb7pTTu/a1pgu5VaEWdBXMNC6cVtii/aPMfRTPXUH0fwNx687HJh/gZOTkTQGP4DsU8Aiyj3f0poTNHxTDQO67cfT94cEbVhoDVMPAXEYhF6LDAHIHyFEZApYy4OT/5IXuxwp/9hHQ9Ac=
   </data>
  </layer>
  <layer id="12" name="Decor" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXE0AABAAAAEAu90OsA==
+   KLUv/WDAXOUAAGgAAM0GAADOBgAAzwYAAwCZmFw+EASqf5x2gAU=
   </data>
  </layer>
  <imagelayer id="13" name="base" visible="0">
