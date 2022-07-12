@@ -21958,7 +21958,7 @@ const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 // Specifically Roamers not sure what else.
 pokemonList.forEach(p => {
     // Calculate our attack values
-    const baseOffense = Math.round((p.base.attack * p.base.specialAttack) / Math.log(p.base.attack )  + Math.sqrt(p.base.speed));
+    const baseOffense = Math.round((p.base.attack * p.base.specialAttack) / Math.log(p.base.attack * p.base.specialAttack)  + Math.sqrt(p.base.speed));
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * Math.sqrt(p.base.hitpoints + p.base.speed);
     const max = Math.max(...Object.values(p.base));
