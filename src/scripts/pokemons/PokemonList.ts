@@ -21960,8 +21960,8 @@ pokemonList.forEach(p => {
     // Calculate our attack values
     const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
-    const baseStamina = 2 * Math.sqrt(p.base.hitpoints + p.base.speed);
-    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense * 1.001 ** ((baseOffense * Math.sqrt(baseDefense * baseStamina)) / 100) / 250));
+    const baseStamina = 2 * p.base.hitpoints;
+    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense * 1.001 ** ((baseOffense * Math.sqrt(baseDefense * baseStamina)) / 100) / 175));
 
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
