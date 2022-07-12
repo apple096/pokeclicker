@@ -21965,7 +21965,7 @@ pokemonList.forEach(p => {
     const sum = Object.values(p.base).reduce((b , a) => b + a,0);
     const exponent = Math.min(2, Math.max(0, max * 3 - sum) * 10);
     const multiplier = Math.max(1, Math.round(Math.log2(max) - 6) ** exponent);
-    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense * 1.001 ** ((baseOffense * Math.sqrt(baseDefense * baseStamina)) / 1000) * multiplier / 350));
+    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense * 1.001 ** ((baseOffense * Math.sqrt(baseDefense * baseStamina)) / 1000) * multiplier / 400));
 
     if ((p as PokemonListData).baby) {
         // Calculate prevolutions/baby pokemon
