@@ -62,7 +62,7 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
         text: 'Breeding Efficiency',
         getValue: (p) => {
             const eggStep = pokemonMap[p.name].eggCycles * 40;
-            return ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + Math.round(p.proteinsUsed() * ((p.baseAttack * eggStep) ** 1.9 / (10 ** 11)))) / pokemonMap[p.name].eggCycles);
+            return ((p.baseAttack * (BREEDING_ATTACK_BONUS / 100) + Math.round(p.proteinsUsed() * Math.max(0.5, ((p.baseAttack * eggStep) ** 1.9 / (10 ** 11))))) / pokemonMap[p.name].eggCycles);
         },
     },
 
